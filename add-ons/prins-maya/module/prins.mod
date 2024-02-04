@@ -1,0 +1,2 @@
++ MAYAVERSION:2022 PLATFORM:win64 prems-maya 0.1.0 ..\
++ MAYAVERSION:2023 PLATFORM:win64 prems-maya 0.1.0 ..\

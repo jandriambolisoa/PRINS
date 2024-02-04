@@ -1,0 +1,33 @@
+#
+# This file regroups the configurations available for one or multiple
+# application(s).
+#
+# It is used when the DCC Launcher is updated allowing admins to have
+# all the necessary paths in the same place. Note that you can create
+# duplicated files for the same application if you want a specific
+# configuration for a specific context.
+#
+# Icons are loaded by the DCC Launcher through the ./gui/icons folder
+# and will be recognised thanks to the app name given inside, here.
+#
+# The differents keys must be in that order (see below) and duplicate
+# keys IS NOT supported except for environment paths.
+# 
+# PIPELINE:
+#   app:
+#     name:                 The name of the software
+#     version:              The version on the software
+#     path:                 The path to the .exe
+#     comment:              (optionnal) An additionnal info about this config
+#   envs:
+#     EnvironmentVariable:  The env variable value
+#
+# File for SCREEN TO GIF
+#
+
+DERBY:
+  app:
+    name:               "Screen to GIF"
+    version:            "2.32"
+    path:               "C:/Program Files (x86)/ScreenToGif/ScreenToGif.exe"
+

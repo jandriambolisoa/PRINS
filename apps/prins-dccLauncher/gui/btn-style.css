@@ -1,0 +1,13 @@
+QPushButton{
+	background-color:qlineargradient(spread:pad, x1:0.2, y1:0.33, x2:0.66, y2:1, stop:0 rgb(90, 88, 97), stop:1 rgb(108, 108, 113));
+	color:white;
+	border-style:	outset;
+	border-radius:	9px;
+}
+QPushButton:hover{
+	background-color:rgb(90, 88, 97);
+}
+QPushButton:pressed{
+	background-color:rgb(63, 63, 67);
+	border-style:	inset;
+}

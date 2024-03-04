@@ -1,7 +1,7 @@
-# PREMIER Python module
+# Prins API Python module
 
-The module is available as the `prems` folder.
+The module is available as the `prins` folder.
 
-## pGui Python sub module
-Contains PREMIER base classes for the graphic user interfaces.
-Elements of this module inherits from PySide2 modules.
+## prins
+Contains the heart of the pipeline.
+Where the normalized paths are coded and generated.

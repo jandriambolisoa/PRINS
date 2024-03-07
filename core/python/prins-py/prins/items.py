@@ -3,210 +3,18 @@ import yaml
 import json
 
 from .explorer import PathFinder
-
-#
-# ItemBase is the base class for all the other items
-#
-
-class ItemBase:
-
-    """Base class for any 'Prins Item'
-    When adding attributes to children classes, they must follow
-    this rule :
-    - Attribute name must start with a k
-    - Attribute value must be an integer
-    """
-
-    def __init__(self) -> None:
-        pass
-
-    def __str__(self):
-        return str("<Prins Object : %s>"%(self.__class__.__name__))
-    
-    def asString(self, kValue):
-        """Returns the string version of an item variable
-
-        :param kValue: Key value
-        :type kValue: int
-        :return: The key as a text
-        :rtype: string
-        """
-        # Import labels yaml file as a dict
-        folderpath, filename = os.path.split(os.path.normpath(__file__))
-        labelsPath = os.path.join(folderpath, "labels.yml")
-        with open(labelsPath, "r") as f:
-            labels = yaml.safe_load(f)
-
-        return labels[self.__class__.__name__].get(kValue, "Unknown")
-    
-    def listKeys(self):
-        """Returns a list of every item's attribute
-
-        :return: Every item's attr
-        :rtype: list(str,)
-        """
-        allKeys = []
-        classAsDict = self.__dict__
-
-        for key in list(classAsDict.keys()):
-            if "k" in key[0]:
-                allKeys.append(key)
-
-        return allKeys
-    
-    def listValues(self):
-        """Returns a list of every item's attribute's value
-
-        :return: Every item's attr value
-        :rtype: list(int,)
-        """
-        allValues = []
-        allKeys = self.listKeys()
-        classAsDict = self.__dict__
-
-        for key in allKeys:
-            allValues.append(classAsDict[key])
-
-        return allValues
-    
-    @staticmethod
-    def findItems(parentItemFolder, value = "*", perfectMatch = False):
-        """Returns a list of items name corresponding to the search request
-
-        :param parentItemFolder: The folder path to search into
-        :type parentItemFolder: str
-        :param value: The search request, defaults to "*"
-        :type value: str, optional
-        :param perfectMatch: If True, will returns only the perfect matching result, defaults to False
-        :type perfectMatch: bool, optional
-        :raises TypeError: Raises an error if arguments are of the wrong type
-        :return: A list of found items
-        :rtype: list(str,)
-        """
-
-        if not isinstance(value, str) or not isinstance(parentItemFolder, str):
-            raise TypeError("Arguments must be of type string")
-
-        os.path.normpath(parentItemFolder)
-
-        # List all the items
-        if os.path.isdir(parentItemFolder):
-            allItems = os.listdir(parentItemFolder)
-
-            # Keep corresponding items
-            if value != "*":
-                foundItems = []
-                
-                if perfectMatch:
-                    for item in allItems:
-                        if value == item:
-                            foundItems.append(item)
-                            break
-                else:
-                    for item in allItems:
-                        if value in item:
-                            foundItems.append(item)
-
-                return foundItems
-
-            else:
-                return allItems
-
+from .superItems import ItemBase
+from .subItems import Category, Status, Task
 
 #
 # Every item has its own variables.
 # Different items are :
-#   - Category
-#   - Task
-#   - Status
 #   - Asset
 #   - Show
+#   - Episode
+#   - Sequence
 #   - Shot
 #
-
-
-class Category(ItemBase):
-    
-    # Asset
-    kNone = 0
-    kProp = 1
-    kCharacter = 2
-    kEnv = 3
-    kAnimal = 4
-    kNature = 5
-    kVehicle = 6
-
-    # Show
-    kShort = 91 
-    kSeries = 92 
-    kFeature = 93 
-
-    def __init__(self):
-        super().__init__()
-
-
-class Task(ItemBase):
-
-    # Asset  
-    kNone = 0 
-    kModeling = 1 
-    kTexturing = 2 
-    kRigging = 3 
-    kShading = 4 
-    kSetDressing = 5 
-    kDesign = 6
-
-    # Shot
-    kAnimation = 51
-    kLighting = 52
-    kFX = 53
-    kCFX = 54
-    kCompositing = 55
-    kPreviz = 56
-
-    kTesting = 99
-
-    def __init__(self):
-        super().__init__()
-
-
-class Status(ItemBase):
-
-    kNone = 0
-
-    kAssetStandBy = 11
-    kAssetInProgress = 12
-    kAssetAbort = 18
-    kAssetDone = 19
-
-    kTaskToDo = 21
-    kTaskInProgress = 22
-    kTaskToReview = 23
-    kTaskAbort = 28
-    kTaskDone = 29
-
-    kShowStandBy = 31
-    kShowInProgress = 32
-    kShowAbort = 38
-    kShowDone = 39
-
-    kEpisodeStandBy = 41
-    kEpisodeInProgress = 42
-    kEpisodeAbort = 48
-    kEpisodeDone = 49
-
-    kSequenceStandBy = 51
-    kSequenceInProgress = 52
-    kSequenceAbort = 58
-    kSequenceDone = 59
-
-    kShotStandBy = 61
-    kShotInProgress = 62
-    kShotAbort = 68
-    kShotDone = 69
-
-    def __init__(self):
-        super().__init__()
 
 
 class Asset(ItemBase):
@@ -253,6 +61,7 @@ class Asset(ItemBase):
             raise Exception("The asset %s does not exist"%assetId)
 
         newAsset = Asset(**datas)
+        newAsset.assetId = assetId
 
         return newAsset
 
@@ -308,7 +117,7 @@ class Asset(ItemBase):
         if changeCategories:
             if isinstance(value, list):
                 for v in value:
-                    if not value in list(Category.listValues()):
+                    if not value in list(Category().listValues()):
                         validArgument = False
                     else:
                         self.category = value
@@ -318,7 +127,7 @@ class Asset(ItemBase):
         if addCategories:
             if isinstance(value, list):
                 for cat in value:
-                    if cat in list(Category.listValues()):
+                    if cat in list(Category().listValues()):
                         self.category.append(cat)
                     else:
                         validArgument = False
@@ -327,7 +136,7 @@ class Asset(ItemBase):
 
         if changeStatus:
             if isinstance(value, int):
-                if value in list(Status.listValues()) and value > 10 and value < 20:
+                if value in list(Status().listValues()) and value > 10 and value < 20:
                     self.status = value
             else:
                 validArgument = False
@@ -400,7 +209,7 @@ class Asset(ItemBase):
     def create(cls,
                assetId,
                category = [Category.kProp],
-               status = Status.kAssetToDo,
+               status = Status.kAssetStandBy,
                showId = [],
                description = None,
                userDatas = None):
@@ -412,7 +221,7 @@ class Asset(ItemBase):
         :type assetId: str
         :param category: The categories of the asset, defaults to [Category.kProp]
         :type category: list(int,) or int, optional
-        :param status: The status of the asset, defaults to Status.kAssetToDo
+        :param status: The status of the asset, defaults to Status.kAssetStandBy
         :type status: int, optional
         :param showId: The shows of the asset, defaults to []
         :type showId: list(str,), optional
@@ -450,18 +259,21 @@ class Asset(ItemBase):
         # Get user defined category
         if isinstance(category, list):
             for c in category:
-                if c in Category.listValues():
+                if c in Category().listValues():
                     newAsset.category.append(c)
                 else:
                     raise Exception("Asset.category must be attributes of Category")
         else:
-            if category in Category.listValues():
+            if category in Category().listValues():
                 newAsset.category.append(category)
             else:
                 raise Exception("Asset.category must be attributes of Category")
+            
+        # Remove duplicates
+        newAsset.category = list(dict.fromkeys(newAsset.category))
         
         # Get user defined status
-        if status in Status.listValues():
+        if status in Status().listValues():
             newAsset.status = status
         else:
             raise Exception("Asset.status must be an attribute of Status")
@@ -482,7 +294,7 @@ class Asset(ItemBase):
         # Get user defined description
         if not description:
             newAsset.description = "No description."
-        if description and isinstance(description, str):
+        elif description and isinstance(description, str):
             newAsset.description = description
         else:
             raise TypeError("Asset.description must be a string")
@@ -511,8 +323,7 @@ class Asset(ItemBase):
             for task in Task().listValues():
                 # Generate only asset tasks folders
                 if task > 0 and task < 50:
-                    taskName = Task().asString(task)
-                    finder.update_task(taskName)
+                    finder.update_task(input = task)
                     taskPath = finder.generate_result().result
                     os.makedirs(taskPath)
 
@@ -593,7 +404,7 @@ class Show(ItemBase):
 
         finder = PathFinder()
         finder.generate_projectRoot()
-        finder.update_assetId(showId)
+        finder.update_showId(showId)
         finder.update_template(Show.__name__, "id")
         idFilepath = finder.generate_result().result
 
@@ -604,6 +415,7 @@ class Show(ItemBase):
             raise Exception("The show %s does not exist"%showId)
 
         show = Asset(**datas)
+        show.showId = showId
 
         return show
 
@@ -652,7 +464,7 @@ class Show(ItemBase):
         if changeCategories:
             if isinstance(value, list):
                 for v in value:
-                    if not value in list(Category.listValues()):
+                    if not value in list(Category().listValues()):
                         validArgument = False
                     else:
                         self.category = value
@@ -662,7 +474,7 @@ class Show(ItemBase):
         if addCategories:
             if isinstance(value, list):
                 for cat in value:
-                    if cat in list(Category.listValues()):
+                    if cat in list(Category().listValues()):
                         self.category.append(cat)
                     else:
                         validArgument = False
@@ -671,7 +483,7 @@ class Show(ItemBase):
 
         if changeStatus:
             if isinstance(value, int):
-                if value in list(Status.listValues()) and value > 30 and value < 40:
+                if value in list(Status().listValues()) and value > 30 and value < 40:
                     self.status = value
             else:
                 validArgument = False
@@ -774,18 +586,21 @@ class Show(ItemBase):
         # Get user defined category
         if isinstance(category, list):
             for c in category:
-                if c in Category.listValues():
+                if c in Category().listValues():
                     newShow.category.append(c)
                 else:
                     raise Exception("Show.category must be attributes of Category")
         else:
-            if category in Category.listValues():
+            if category in Category().listValues():
                 newShow.category.append(category)
             else:
                 raise Exception("Show.category must be attributes of Category")
+            
+        # Remove duplicates
+        newShow.category = list(dict.fromkeys(newShow.category))
         
         # Get user defined status
-        if status in Status.listValues():
+        if status in Status().listValues():
             newShow.status = status
         else:
             raise Exception("Show.status must be an attribute of Status")
@@ -793,7 +608,7 @@ class Show(ItemBase):
         # Get user defined description
         if not description:
             newShow.description = "No description."
-        if description and isinstance(description, str):
+        elif description and isinstance(description, str):
             newShow.description = description
         else:
             raise TypeError("Show.description must be a string")

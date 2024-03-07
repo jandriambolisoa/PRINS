@@ -1,4 +1,4 @@
-# PREMIER DCC LAUNCHER
+# PRINS DCC LAUNCHER
 
 This application launches different DCCs in specific environment configs.
 This is where your pipeline starts. Each DCC's configuration has to be

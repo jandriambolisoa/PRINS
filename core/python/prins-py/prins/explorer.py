@@ -1,7 +1,7 @@
 import os
 import yaml
 
-from .items import Task
+from .subItems import Task
 
 class PathFinder:
 
@@ -44,12 +44,13 @@ class PathFinder:
         :return: The current instance of PathFinder
         :rtype: self
         """
+
         # Make sure the input is an str
         if not isinstance(input, str):
             raise TypeError("The input arg must be a string")
-        
+
         # Check if the root is a valid path
-        if not (input.find("/") > -1) or not (input.find("\\") > -1):
+        if not os.path.isdir(os.path.normpath(input)):
             raise Exception("The project root must be a valid path")
 
         # Update datas
@@ -74,7 +75,7 @@ class PathFinder:
             raise TypeError("The input arg must be a of type Task.kValue")
         
         # Convert the input to a string
-        input = Task.asString(input)
+        input = Task().asString(input)
         if input == "Unknown":
             raise ValueError("The Task.kValue is not recognized.")
         
@@ -405,7 +406,7 @@ class PathFinder:
 
         template = os.path.splitext(template)[0]
         splittedTemplate = template.split(".")
-        templateKeys = template[0].split("_")
+        templateKeys = splittedTemplate[0].split("_")
         if len(splittedTemplate) > 1:
             templateKeys.append(splittedTemplate[1])
         
@@ -417,7 +418,7 @@ class PathFinder:
 
         for i in range(len(userKeys)):
             if templateKeys[i].find("{") > -1:
-                key = templateKeys.strip("{ }")
+                key = templateKeys[i].strip("{ }")
                 value = userKeys[i]
 
                 extractedDatas[key] = value
@@ -442,6 +443,8 @@ class PathFinder:
             splitPath = filepath.split("\\")
             i = splitPath.index("PRINS")
             filepath = "\\".join(splitPath[:i])
+
+            self.update_projectRoot(filepath)
         except:
             raise Exception("An error occured. Cannot generate the project root.")
 
@@ -665,3 +668,31 @@ class PathFinder:
                 print("> %s"%k)
         else:
             raise ValueError("%s is a non-existent type of template."%type)
+        
+    def clear(self):
+        """Clear all the datas
+
+        :return: The current instance of PathFinder
+        :rtype: self
+        """
+
+        self.result = None
+
+        self.template = None
+
+        self.datas = {
+            "projectRoot": None,
+            "task": None,
+            "assetId": None,
+            "version": None,
+            "iteration": None,
+            "UDIM": None,
+            "showId": None,
+            "episodeId": None,
+            "sequenceId": None,
+            "shotId": None,
+            "dcc": None,
+            "file": None
+        }
+
+        return self

@@ -1,0 +1,6 @@
+{
+    "scriptName" : "Open...",
+    "buttonLabel" : "Open",
+    "annotation" : "Open a file from the Prins pipeline.",
+    "scriptType" : "Python"
+}

@@ -1,0 +1,7 @@
+{
+    "scriptName" : "Guerilla Tags Manager",
+    "buttonLabel" : "TAGS",
+    "annotation" : "Guerilla Tags Manager - Manage tags for Guerilla Render.",
+    "scriptType" : "Python",
+    "subMenu" : "Utils"
+}

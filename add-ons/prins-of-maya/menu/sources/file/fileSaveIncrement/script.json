@@ -1,0 +1,6 @@
+{
+    "scriptName" : "Increment save",
+    "buttonLabel" : "INCREMENT",
+    "annotation" : "Increment your current save in the Prins pipeline.",
+    "scriptType" : "Python"
+}

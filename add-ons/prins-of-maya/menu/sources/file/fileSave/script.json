@@ -1,0 +1,6 @@
+{
+    "scriptName" : "Save...",
+    "buttonLabel" : "SAVE",
+    "annotation" : "Save your file in the Prins pipeline.",
+    "scriptType" : "Python"
+}

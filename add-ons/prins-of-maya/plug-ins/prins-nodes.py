@@ -15,7 +15,7 @@ nodes = getPrinsNodes()
 def initializePlugin(plugin):
     fn_plugin = OpenMaya.MFnPlugin(
         plugin,
-        "Prins Maya add-on - RIG",
+        "Prins Maya add-on - Nodes",
         "0.1.0",
         "Any")
 

@@ -1,6 +1,6 @@
-from .superItems import ItemBase
+from .core import PrinsTag
 
-class Category(ItemBase):
+class Category(PrinsTag):
     
     # Asset
     kNone = 0
@@ -20,7 +20,7 @@ class Category(ItemBase):
         super().__init__()
 
 
-class Task(ItemBase):
+class Task(PrinsTag):
 
     # Asset  
     kNone = 0 
@@ -45,7 +45,7 @@ class Task(ItemBase):
         super().__init__()
 
 
-class Status(ItemBase):
+class Status(PrinsTag):
 
     kNone = 0
 

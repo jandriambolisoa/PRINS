@@ -1,6 +1,6 @@
 from maya.api   import OpenMaya
 
-class PN_BaseNode(OpenMaya.MPxNode):
+class POM_BaseNode(OpenMaya.MPxNode):
 
     def __init__(self):
         self.callback_ids = []
@@ -421,6 +421,51 @@ class PN_BaseNode(OpenMaya.MPxNode):
         node.addAttribute(parentAttribute)
 
         return childAttributes
+    
+    @staticmethod
+    def createEnumAttr(node, longName, shortName, items, type = 0):
+        """Create an enum attribute for this node
+
+        :param node: The node to add this attribute
+        :type node: MPxNode
+        :param longName: Long attribute name
+        :type longName: string
+        :param shortName: Short attribute name
+        :type shortName: string
+        :param items: The labels to enumerate
+        :type items: list(string,)
+        :param type: Defines the attribute's type, 0:input, 1:output, defaults to 0
+        :type type: int, optional
+        :return: The created attribute
+        :rtype: OpenMaya.MFnTypedAttribute
+        """
+        #Declare attribute's type to create
+        enum_attr = OpenMaya.MFnEnumAttribute()
+
+        #Create the child attributes
+        attribute = enum_attr.create(
+            longName,
+            shortName
+        )
+
+        for i in range(len(items)):
+            enum_attr.addField(items[i], i)
+
+        if type == 0:
+            enum_attr.readable = False
+            enum_attr.writable = True
+            enum_attr.keyable = True
+        elif type == 1:
+            enum_attr.readable = True
+            enum_attr.writable = False
+            enum_attr.keyable = False
+        else:
+            raise ValueError("Argument 'type' must be 0 or 1.")
+
+        # Add the attribute to the node
+        node.addAttribute(attribute)
+
+        return attribute
     
     def setDependencies(self, inputs, outputs):
         """Set internal node dependencies

@@ -1,14 +1,14 @@
 from maya.api       import OpenMaya
 from maya           import mel
 
-from .node_base     import PN_BaseNode
+from .node_base     import POM_BaseNode
 
 from .logic         import blend
 
-class PN_CurveCompressor(PN_BaseNode):
+class POM_CurveCompressor(POM_BaseNode):
     
     # Define identity
-    type_name = "PN_CurveCompressor"
+    type_name = "POM_CurveCompressor"
 
     # Define attributes
     inMesh =            None

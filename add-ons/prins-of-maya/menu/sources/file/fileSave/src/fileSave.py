@@ -10,10 +10,10 @@ from prins.items        import Asset
 from prins.items        import Episode
 from prins.items        import Sequence
 from prins.items        import Shot
-from prins.subItems     import Task
+from prins.tags     import Task
 
-from pGui.Ui_fileSaveDialog import Ui_fileSaveDialogWidget
-from pUtils.mayaWorkspace   import createMayaWorkspace
+from pom.gui.Ui_fileSaveDialog import Ui_fileSaveDialogWidget
+from pom.utils.mayaWorkspace   import createMayaWorkspace
 
 from maya import OpenMayaUI
 from maya import cmds
@@ -203,7 +203,7 @@ class FileSaveWindow (QtWidgets.QMainWindow):
                 finder.update_version(1)
                 newFile = finder.generate_result().result
                 cmds.file(rename = os.path.join(scenesPath, newFile))
-                cmds.file(save = True)
+                cmds.file(save = True, type = "mayaAscii")
 
             else:
                 # If the workspace already exist, look for scenes
@@ -220,7 +220,7 @@ class FileSaveWindow (QtWidgets.QMainWindow):
 
                 newFile = finder.generate_result().result
                 cmds.file(rename = os.path.join(scenesPath, newFile))
-                cmds.file(save = True)
+                cmds.file(save = True, type = "mayaAscii")
 
         # Close the save dialog
         mel.eval('print "> PRINS Successfully saved your file.\\n"')

@@ -34,8 +34,8 @@ Files:
 
     # Publish file format
     # Asset
-    alembic: "{task}_{assetId}_{version}.{iteration}.abc"
-    assetFbx: "{task}_{assetId}_{version}.{iteration}.fbx"
+    assetAlembic: "{task}_{assetId}_{version}.abc"
+    assetFbx: "{task}_{assetId}_{version}.fbx"
     texturesExr: "{task}_{assetId}_{version}.{UDIM}.exr"
     grendergraph: "{task}_{assetId}_{version}.grendergraph"
     movAsset: "{task}_{assetId}_{version}.mov"
@@ -43,6 +43,7 @@ Files:
 
     # Shot
     animFbx: "{task}_{showId}_{episodeId}_{sequenceId}_{shotId}_{version}.fbx"
+    animAlembic: "{task}_{showId}_{episodeId}_{sequenceId}_{shotId}_{version}.abc"
     renderExr: "{task}_{showId}_{episodeId}_{sequenceId}_{shotId}_{version}.{frame}.ma"
     dpx: "{task}_{showId}_{episodeId}_{sequenceId}_{shotId}_{version}.{frame}.dpx"
     movShot: "{task}_{showId}_{episodeId}_{sequenceId}_{shotId}_{version}.mov"

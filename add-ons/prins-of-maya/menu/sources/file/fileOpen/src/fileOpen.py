@@ -8,9 +8,9 @@ from prins.items        import Asset
 from prins.items        import Episode
 from prins.items        import Sequence
 from prins.items        import Shot
-from prins.subItems     import Task
+from prins.tags     import Task
 
-from pGui.Ui_fileOpenDialog import Ui_fileSaveDialogWidget
+from pom.gui.Ui_fileOpenDialog import Ui_fileSaveDialogWidget
 
 from maya import cmds
 from maya import mel
@@ -169,7 +169,7 @@ class FileOpenWindow (QtWidgets.QMainWindow):
             allScenes = os.listdir(os.path.normpath(scenesPath))
             toOpen = allScenes[-1]
 
-            cmds.file(toOpen, o=True)
+            cmds.file(toOpen, o=True, force = True)
 
 
         # Close the save dialog

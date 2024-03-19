@@ -1,12 +1,12 @@
 from maya.api       import OpenMaya
 from maya           import mel
 
-from .node_base     import PN_BaseNode
+from .node_base     import POM_BaseNode
 
-class PN_SurfacePin(PN_BaseNode):
+class POM_SurfacePin(POM_BaseNode):
     
     # Define identity
-    type_name = "PN_SurfacePin"
+    type_name = "POM_SurfacePin"
 
     # Define attributes
     inOrigMesh =        None

@@ -26,7 +26,7 @@ if scenePath and Asset:
         finder.increment_version().generate_result()
 
     cmds.file(rename = finder.result)
-    cmds.file(save = True)
+    cmds.file(save = True, type = "mayaAscii")
     #except:
     #    raise Exception("An error occured while saving your scene.")
 
@@ -38,7 +38,7 @@ elif scenePath and not Asset:
         finder.increment_save().generate_result()
 
         cmds.file(rename = finder.result)
-        cmds.file(save = True)
+        cmds.file(save = True, type = "mayaAscii")
     except:
         raise Exception("An error occured while saving your scene.")
     

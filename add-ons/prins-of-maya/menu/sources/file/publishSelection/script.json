@@ -1,0 +1,6 @@
+{
+    "scriptName" : "Publish selection...",
+    "buttonLabel" : "PUBLISH",
+    "annotation" : "Publish your selection in the Prins pipeline.",
+    "scriptType" : "Python"
+}

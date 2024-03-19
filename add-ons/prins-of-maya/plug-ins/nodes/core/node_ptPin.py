@@ -1,12 +1,12 @@
 from maya.api       import OpenMaya
 from maya           import mel
 
-from .node_base     import PN_BaseNode
+from .node_base     import POM_BaseNode
 
-class PN_PointPin(PN_BaseNode):
+class POM_PointPin(POM_BaseNode):
     
     # Define identity
-    type_name = "PN_PointPin"
+    type_name = "POM_PointPin"
 
     # Define attributes
     inMesh =        None

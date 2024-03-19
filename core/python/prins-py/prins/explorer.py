@@ -1,7 +1,7 @@
 import os
 import yaml
 
-from .subItems import Task
+from .tags import Task
 
 class PathFinder:
 

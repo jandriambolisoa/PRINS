@@ -2,7 +2,7 @@ from maya       import cmds
 from maya       import mel
 from maya.api   import OpenMaya
 
-from rig.Nodes  import getPrinsNodes
+from nodes.utils  import getPrinsNodes
 
 import os
 import sys

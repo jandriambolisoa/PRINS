@@ -2,9 +2,9 @@ import os
 import yaml
 import json
 
-from .explorer import PathFinder
-from .superItems import ItemBase
-from .subItems import Category, Status, Task
+from .core      import PrinsItem
+from .explorer  import PathFinder
+from .tags      import Category, Status, Task
 
 #
 # Every item has its own variables.
@@ -17,7 +17,7 @@ from .subItems import Category, Status, Task
 #
 
 
-class Asset(ItemBase):
+class Asset(PrinsItem):
     
     def __init__(self,
                  assetId = None,
@@ -372,8 +372,52 @@ class Asset(ItemBase):
 
         return searchResults
 
+    @staticmethod
+    def getPublishFilepath(filenameToPublish, template):
 
-class Show(ItemBase):
+        """Get publish filepath from publish filename
+
+        :return: A filepath
+        :rtype: str
+        """
+
+        finder = PathFinder()
+        finder.generate_projectRoot()
+        finder.update_datasFromFilename(filenameToPublish, template)
+        finder.update_file(filenameToPublish)
+        finder.update_template("Asset", "publishs")
+        finder.generate_result()
+
+        # Create the version folder
+        publishFolder = os.path.join(finder.result, finder.datas["version"])
+        if not os.path.isdir(publishFolder):
+            os.makedirs(publishFolder)
+
+        # Return the publish filepath
+        finder.update_template("Asset", "publishedFile")
+        finder.generate_result()
+        return finder.result
+
+    @staticmethod
+    def getDeliveryFilepath(filenameToDeliver, template):
+
+        """Get delivery filepath from delivery filename
+
+        :return: A filepath
+        :rtype: str
+        """
+
+        finder = PathFinder()
+        finder.generate_projectRoot()
+        finder.update_datasFromFilename(filenameToDeliver, template)
+        finder.update_file(filenameToDeliver)
+        finder.update_template("Asset", "deliveryFile")
+        finder.generate_result()
+
+        return finder.result
+
+
+class Show(PrinsItem):
     
     def __init__(self,
                  showId = None,
@@ -691,7 +735,7 @@ class Show(ItemBase):
         return searchResults
 
 
-class Episode(ItemBase):
+class Episode(PrinsItem):
     
     def __init__(self,
                  parentShow = None,
@@ -789,7 +833,7 @@ class Episode(ItemBase):
         return searchResults
 
 
-class Sequence(ItemBase):
+class Sequence(PrinsItem):
     
     def __init__(self,
                  parentShow = None,
@@ -898,7 +942,7 @@ class Sequence(ItemBase):
         return searchResults
 
 
-class Shot(ItemBase):
+class Shot(PrinsItem):
     
     def __init__(self, 
                  parentShow = None,
@@ -972,7 +1016,7 @@ class Shot(ItemBase):
                 # Generate only shot tasks folders
                 if task > 50 and task < 99:
                     taskName = Task().asString(task)
-                    finder.update_task(taskName)
+                    finder.update_task(input = task)
                     taskPath = finder.generate_result().result
                     os.makedirs(taskPath)
 
@@ -1022,3 +1066,47 @@ class Shot(ItemBase):
         searchResults = cls.findItems(parentFolder, characters, perfectMatch)
 
         return searchResults
+
+    @staticmethod
+    def getPublishFilepath(filenameToPublish, template):
+
+        """Get publish filepath from publish filename
+
+        :return: A filepath
+        :rtype: str
+        """
+
+        finder = PathFinder()
+        finder.generate_projectRoot()
+        finder.update_datasFromFilename(filenameToPublish, template)
+        finder.update_file(filenameToPublish)
+        finder.update_template("Shot", "publishs")
+        finder.generate_result()
+
+        # Create the version folder
+        publishFolder = os.path.join(finder.result, finder.datas["version"])
+        if not os.path.isdir(publishFolder):
+            os.makedirs(publishFolder)
+
+        # Return the publish filepath
+        finder.update_template("Shot", "publishedFile")
+        finder.generate_result()
+        return finder.result
+
+    @staticmethod
+    def getDeliveryFilepath(filenameToDeliver, template):
+
+        """Get delivery filepath from delivery filename
+
+        :return: A filepath
+        :rtype: str
+        """
+
+        finder = PathFinder()
+        finder.generate_projectRoot()
+        finder.update_datasFromFilename(filenameToDeliver, template)
+        finder.update_file(filenameToDeliver)
+        finder.update_template("Shot", "deliveryFile")
+        finder.generate_result()
+
+        return finder.result

@@ -1,5 +1,5 @@
 # OBSOLETE
-Up to date prins-py can be found [here](https://github.com/jandriambolisoa/PRINS).
+Up to date prins-py can be found [here](https://github.com/jandriambolisoa/prins-py).
 
 # Prins API Python module
 

@@ -1,3 +1,6 @@
+# OBSOLETE
+Up to date prins-py can be found [here](https://github.com/jandriambolisoa/PRINS).
+
 # Prins API Python module
 
 The module is available as the `prins` folder.

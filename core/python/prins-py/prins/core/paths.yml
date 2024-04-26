@@ -41,6 +41,9 @@ Files:
     movAsset: "{task}_{assetId}_{version}.mov"
     mp4Asset: "{task}_{assetId}_{version}.mp4"
 
+    # Show
+    movEpisode: "{task}_{showId}_{version}.mov"
+    mp4Episode: "{task}_{showId}_{version}.mp4"
     # Shot
     animFbx: "{task}_{showId}_{episodeId}_{sequenceId}_{shotId}_{version}.fbx"
     animAlembic: "{task}_{showId}_{episodeId}_{sequenceId}_{shotId}_{version}.abc"
@@ -70,30 +73,42 @@ Asset:
     delivery: "{projectRoot}/Assets/{assetId}/{task}/delivery"
     deliveryFile: "{projectRoot}/Assets/{assetId}/{task}/delivery/{file}"
     
+User:
+    parent: "{projectRoot}/Users"
+    root: "{projectRoot}/Users/{userId}"
+    id: "{projectRoot}/Users/{userId}/id.json"
+
 Show:
     parent: "{projectRoot}/Shows"
     root: "{projectRoot}/Shows/{showId}"
     id: "{projectRoot}/Shows/{showId}/id.json"
     episodes: "{projectRoot}/Shows/{showId}/episodes"
     delivery: "{projectRoot}/Shows/{showId}/delivery"
+    deliveryFile: "{projectRoot}/Shows/{showId}/delivery/{file}"
     editorial: "{projectRoot}/Shows/{showId}/editorial"
     preproduction: "{projectRoot}/Shows/{showId}/preproduction"
 
 Episode:
     parent: "{projectRoot}/Shows/{showId}/episodes"
     root: "{projectRoot}/Shows/{showId}/episodes/{episodeId}"
+    id: "{projectRoot}/Shows/{showId}/episodes/{episodeId}/id.json"
+    delivery: "{projectRoot}/Shows/{showId}/delivery/{episodeId}"
     deliveryFile: "{projectRoot}/Shows/{showId}/delivery/{episodeId}/{file}"
 
 Sequence:
     parent: "{projectRoot}/Shows/{showId}/episodes/{episodeId}"
     root: "{projectRoot}/Shows/{showId}/episodes/{episodeId}/{sequenceId}"
+    id: "{projectRoot}/Shows/{showId}/episodes/{episodeId}/{sequenceId}/id.json"
+    delivery: "{projectRoot}/Shows/{showId}/delivery/{episodeId}/{sequenceId}"
     deliveryFile: "{projectRoot}/Shows/{showId}/delivery/{episodeId}/{sequenceId}/{file}"
     
 Shot:
     parent: "{projectRoot}/Shows/{showId}/episodes/{episodeId}/{sequenceId}"
     root: "{projectRoot}/Shows/{showId}/episodes/{episodeId}/{sequenceId}/{shotId}"
+    id: "{projectRoot}/Shows/{showId}/episodes/{episodeId}/{sequenceId}/{shotId}/id.json"
     task: "{projectRoot}/Shows/{showId}/episodes/{episodeId}/{sequenceId}/{shotId}/{task}"
     workspace: "{projectRoot}/Shows/{showId}/episodes/{episodeId}/{sequenceId}/{shotId}/{task}/{dcc}"
     publishs: "{projectRoot}/Shows/{showId}/episodes/{episodeId}/{sequenceId}/{shotId}/{task}/publishs"
     publishedFile: "{projectRoot}/Shows/{showId}/episodes/{episodeId}/{sequenceId}/{shotId}/{task}/publishs/{version}/{file}"
+    delivery: "{projectRoot}/Shows/{showId}/delivery/{episodeId}/{sequenceId}/{shotId}"
     deliveryFile: "{projectRoot}/Shows/{showId}/delivery/{episodeId}/{sequenceId}/{shotId}/{file}"

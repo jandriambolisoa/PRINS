@@ -76,3 +76,10 @@ Status:
   62 :  *wip        #kShotInProgress
   68 :  *abort      #kShotAbort
   69 :  *done       #kShotDone
+
+Rank:
+  0   :   *none       #kNone
+  1   :   Artist      #kArtist
+  2   :   Supervisor  #kSupervisor
+
+  -1  :   Admin       #kAdmin

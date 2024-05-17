@@ -34,3 +34,12 @@ DERBY:
 
   envs:
     HOUDINI_USER_PREF_DIR: "E:/shows/PRINCE/PRINS/add-ons/prins-houdini" 
+
+INTRO:
+  app:
+    name:               "Houdini"
+    version:            "20.0.506"
+    path:               "C:/Program Files/Side Effects Software/Houdini 20.0.506/bin/houdini.exe"
+
+  envs:
+    HOUDINI_USER_PREF_DIR: "E:/shows/PRINCE/PRINS/add-ons/prins-houdini" 

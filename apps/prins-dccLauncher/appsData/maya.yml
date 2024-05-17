@@ -32,9 +32,25 @@ DERBY:
     path:               "C:/Program Files/Autodesk/Maya2023/bin/maya.exe"
 
   envs:
-    PYTHONPATH:         "E:/shows/PRINCE/PRINS/core/python/prins-py"                                            # Prins API
-    PYTHONPATH:         "E:/shows/PRINCE/PRINS/core/python/PyYAML"                                              # Python YAML Module
-    MAYA_MODULE_PATH:   "E:/shows/PRINCE/PRINS/add-ons/prins-of-maya/module"                                    # Prins Add-on
-    PYTHONPATH:         "E:/shows/PRINCE/PRINS/add-ons/prins-of-maya/menu"                                      # Prins Menu
+    PYTHONPATH:         "D:/PRINCE/PRINS/core/python/prins-py"                                                  # Prins API
+    PYTHONPATH:         "D:/PRINCE/PRINS/core/python/PyYAML"                                                    # Python YAML Module
+    MAYA_MODULE_PATH:   "D:/PRINCE/PRINS/add-ons/prins-of-maya/module"                                          # Prins Add-on
+    PYTHONPATH:         "D:/PRINCE/PRINS/add-ons/prins-of-maya/menu"                                            # Prins Menu
     PYTHONPATH:         "P:\\shows\\MADA\\td\\maya\\scripts"                                                    # MADA startup
     MAYA_MODULE_PATH:   "Z:\\P3DTools\\productionPackages\\ngskintools\\2.0.39\\ngskintools2\\2023\\module"     # ngSkinTool
+
+INTRO:
+  app:
+    name:               "Maya"
+    version:            "2023"
+    path:               "C:/Program Files/Autodesk/Maya2023/bin/maya.exe"
+
+  envs:
+    PYTHONPATH:         "D:/PRINCE/PRINS/core/python/prins-py"                                                  # Prins API
+    PYTHONPATH:         "D:/PRINCE/PRINS/core/python/PyYAML"                                                    # Python YAML Module
+    MAYA_MODULE_PATH:   "D:/PRINCE/PRINS/add-ons/prins-of-maya/module"                                          # Prins Add-on
+    PYTHONPATH:         "D:/PRINCE/PRINS/add-ons/prins-of-maya/menu"                                            # Prins Menu
+    PYTHONPATH:         "P:\\shows\\MADA\\td\\maya\\scripts"                                                    # MADA startup
+    MAYA_MODULE_PATH:   "Z:\\P3DTools\\productionPackages\\ngskintools\\2.0.39\\ngskintools2\\2023\\module"     # ngSkinTool
+    PYTHONPATH:         "D:/PRINCE/PRINS/apps/prins-scribe"                                                     # Prins Scribe
+    PYTHONPATH:         "D:/PRINCE/PRINS/core/python/prins-qt"                                                  # Prins pyQt

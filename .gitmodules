@@ -1,0 +1,6 @@
+[submodule "core/python/prins-qt"]
+	path = core/python/prins-qt
+	url = https://github.com/jandriambolisoa/prins-qt.git
+[submodule "apps/prins-scribe"]
+	path = apps/prins-scribe
+	url = https://github.com/jandriambolisoa/prins-scribe.git
